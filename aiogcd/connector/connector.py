@@ -17,8 +17,15 @@ DEFAULT_SCOPES = {
     'https://www.googleapis.com/auth/cloud-platform'
 }
 
-DATASTORE_URL = \
-    'https://datastore.googleapis.com/v1/projects/{project_id}:{method}'
+DATASTORE_DEFAULT_HOST = 'datastore.googleapis.com'
+
+def datastore_base_url():
+   emulator_host = os.env.get('DATASTORE_EMULATOR_HOST')
+   if emulator_host:
+      return 'http://' + emulator_host
+   return 'https://' + DATASTORE_DEFAULT_HOST
+   
+DATASTORE_URL = datastore_base_url() + '/v1/projects/{project_id}:{method}'
 
 _MAX_LOOPS = 128
 
