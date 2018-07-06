@@ -5,6 +5,7 @@ Created on: May 19, 2017
             jomido <https://github.com/jomido>
 """
 import json
+import os
 import aiohttp
 from .client_token import Token
 from .service_account_token import ServiceAccountToken
@@ -20,7 +21,7 @@ DEFAULT_SCOPES = {
 DATASTORE_DEFAULT_HOST = 'datastore.googleapis.com'
 
 def datastore_base_url():
-   emulator_host = os.env.get('DATASTORE_EMULATOR_HOST')
+   emulator_host = os.environ.get('DATASTORE_EMULATOR_HOST')
    if emulator_host:
       return 'http://' + emulator_host
    return 'https://' + DATASTORE_DEFAULT_HOST
